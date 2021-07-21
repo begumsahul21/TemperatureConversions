@@ -1,0 +1,99 @@
+<h1 class="heading">
+  Temperature converter
+</h1>
+<div>
+  <form>
+    <div>
+      <label class="row" for="conversionInput">
+        Enter number for conversion :
+      </label>
+      <input type="number"
+             id="conversionInput"
+             name="conversionInput"
+             placeholder="1"
+             [(ngModel)]="conversionInput"
+             aria-placeholder="1"
+             required />
+      <div class="row" *ngIf="!!conversionInput">
+        Select from below for conversion:
+      </div>
+
+      <div *ngIf="!!conversionInput">
+        <div>
+          <label class="label" for="from">
+            <input type="radio"
+                   name="from"
+                   value="Celsius"
+                   [(ngModel)]="from"
+                   (ngModelChange)="convert()" />
+            <span class="degree">
+              Celsius <span class="hidden-md-up">(C°)</span>
+            </span>
+          </label>
+        </div>
+        <div>
+          <label class="label">
+            <input type="radio"
+                   name="from"
+                   value="Fahrenheit"
+                   [(ngModel)]="from"
+                   (ngModelChange)="convert()" />
+            <span class="degree">
+              Fahrenheit <span class="hidden-md-up">(F°)</span>
+            </span>
+          </label>
+        </div>
+        <div>
+          <label class="label">
+            <input type="radio"
+                   name="from"
+                   value="Kelvin"
+                   [(ngModel)]="from"
+                   (ngModelChange)="convert()" />
+            <span class="degree">
+              Kelvin <span class="hidden-md-up">(K°)</span>
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div *ngIf="error">
+    There is a problem serving your request. It is either your input is not in proper format or problem loading.
+  </div>
+  <ng-container *ngIf=" !!this.temperature ">
+    <section class="conversion-results">
+      <div class="conversion-results__heading">
+        {{ temperature ? temperature.input + '°' : '' }} {{ from }} corresponds to
+      </div>
+      <div class="conversion-results__table">
+        <div class="conversion-results__row">
+          <span class="conversion-results__row--degree">
+            Celsius
+          </span>
+          <span class="conversion-results__row--result">
+            {{ temperature.celsius  }}
+          </span>
+        </div>
+
+        <div class="conversion-results__row">
+          <span class="conversion-results__row--degree">
+            Fahrenheit
+          </span>
+          <span class="conversion-results__row--result">
+            {{ temperature.fahrenheit}}
+          </span>
+        </div>
+
+        <div class="conversion-results__row">
+          <span class="conversion-results__row--degree">
+            Kelvin
+          </span>
+          <span class="conversion-results__row--result">
+            {{ temperature.kelvin }}
+          </span>
+        </div>
+      </div>
+    </section>
+  </ng-container>
+</div>
