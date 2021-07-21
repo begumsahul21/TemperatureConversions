@@ -26,7 +26,7 @@ Get the [Changelog](https://github.com/begumsahul21/TemperatureConversion/blob/m
 - Requirements
 	- At least [.NET Core 3.1](https://www.microsoft.com/net/download/core)
 	- [Node.js and npm](https://nodejs.org)
-    - At least [Angular CLI 8.0.0](https://github.com/angular/angular-cli)
+    - At least [Angular CLI 6.0.0](https://github.com/angular/angular-cli)
 
 #### Command line & .NET Core CLI
 - In _ClientApp_ folder run: `npm install`
