@@ -1,99 +1,86 @@
-<h1 class="heading">
+<h1>
   Temperature converter
 </h1>
 <div>
-  <form>
+  <form [formGroup]="form">
+    <label><b>Conversion Input:</b></label>
     <div>
-      <label class="row" for="conversionInput">
-        Enter number for conversion :
-      </label>
-      <input type="number"
-             id="conversionInput"
-             name="conversionInput"
-             placeholder="1"
-             [(ngModel)]="conversionInput"
-             aria-placeholder="1"
-             required />
-      <div class="row" *ngIf="!!conversionInput">
-        Select from below for conversion:
+      <input type="number" formControlName="conversionInput">
+    </div>
+    <div *ngIf="f.conversionInput.touched && f.conversionInput.invalid">
+      *Matching Patterns are 1, 1.2, 1.0234, -1, 0.123 etc.,
+    </div>
+    <br />
+
+    <div *ngIf="f.conversionInput.touched && f.conversionInput.valid">
+      <label><b>Conversion From:</b></label>
+      <div>
+        <input id="celsius"
+               type="radio"
+               value="Celsius"
+               name="conversionFrom"
+               formControlName="conversionFrom"
+               (change)="convert()">
+        <label for="celsius">Celsius</label>
       </div>
 
-      <div *ngIf="!!conversionInput">
-        <div>
-          <label class="label" for="from">
-            <input type="radio"
-                   name="from"
-                   value="Celsius"
-                   [(ngModel)]="from"
-                   (ngModelChange)="convert()" />
-            <span class="degree">
-              Celsius <span class="hidden-md-up">(C°)</span>
-            </span>
-          </label>
-        </div>
-        <div>
-          <label class="label">
-            <input type="radio"
-                   name="from"
-                   value="Fahrenheit"
-                   [(ngModel)]="from"
-                   (ngModelChange)="convert()" />
-            <span class="degree">
-              Fahrenheit <span class="hidden-md-up">(F°)</span>
-            </span>
-          </label>
-        </div>
-        <div>
-          <label class="label">
-            <input type="radio"
-                   name="from"
-                   value="Kelvin"
-                   [(ngModel)]="from"
-                   (ngModelChange)="convert()" />
-            <span class="degree">
-              Kelvin <span class="hidden-md-up">(K°)</span>
-            </span>
-          </label>
-        </div>
+      <div>
+        <input id="farenheit"
+               type="radio"
+               value="Fahrenheit"
+               name="conversionFrom"
+               formControlName="conversionFrom"
+               (change)="convert()">
+        <label for="farenheit">Fahrenheit</label>
       </div>
+
+      <div>
+        <input id="kelvin"
+               type="radio"
+               value="Kelvin"
+               name="conversionFrom"
+               formControlName="conversionFrom"
+               (change)="convert()">
+        <label for="kelvin">Kelvin</label>
+      </div>
+
     </div>
   </form>
   <div *ngIf="error">
-    There is a problem serving your request. It is either your input is not in proper format or problem loading.
+    There is a problem serving your request.
   </div>
+  <br />
   <ng-container *ngIf=" !!this.temperature ">
-    <section class="conversion-results">
-      <div class="conversion-results__heading">
-        {{ temperature ? temperature.input + '°' : '' }} {{ from }} corresponds to
+    <div>
+      <b>{{ temperature ? temperature.input + '°' : '' }} {{ from }} corresponds to</b>
+    </div>
+    <div>
+      <div>
+        <span>
+          Celsius
+        </span>
+        <span>
+          {{ temperature.celsius  }}
+        </span>
       </div>
-      <div class="conversion-results__table">
-        <div class="conversion-results__row">
-          <span class="conversion-results__row--degree">
-            Celsius
-          </span>
-          <span class="conversion-results__row--result">
-            {{ temperature.celsius  }}
-          </span>
-        </div>
 
-        <div class="conversion-results__row">
-          <span class="conversion-results__row--degree">
-            Fahrenheit
-          </span>
-          <span class="conversion-results__row--result">
-            {{ temperature.fahrenheit}}
-          </span>
-        </div>
-
-        <div class="conversion-results__row">
-          <span class="conversion-results__row--degree">
-            Kelvin
-          </span>
-          <span class="conversion-results__row--result">
-            {{ temperature.kelvin }}
-          </span>
-        </div>
+      <div>
+        <span>
+          Fahrenheit
+        </span>
+        <span>
+          {{ temperature.fahrenheit}}
+        </span>
       </div>
-    </section>
+
+      <div>
+        <span>
+          Kelvin
+        </span>
+        <span>
+          {{ temperature.kelvin }}
+        </span>
+      </div>
+    </div>
   </ng-container>
 </div>
